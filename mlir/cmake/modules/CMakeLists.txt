@@ -34,10 +34,8 @@ get_property(MLIR_EXPORTS GLOBAL PROPERTY MLIR_EXPORTS)
 # nlohmann/json and tomlplusplus both have MIT licenses.
 # libstim is Apache version 2.0
 # QECUtils needs to be added manually since it is not in MLIR_EXPORTS
-# todo: the following two lines removed nlohmann_json as export targets, should probably be done for the other extra targets as well
-include(CMakeFindDependencyMacro)
-find_dependency(nlohmann_json)
-export(TARGETS ${MLIR_EXPORTS} QECUtils libstim tomlplusplus_tomlplusplus FILE ${catalyst_cmake_builddir}/CatalystTargets.cmake)
+find_package(nlohmann_json CONFIG REQUIRED PATHS ${nlohmann_json_BINARY_DIR})
+export(TARGETS ${MLIR_EXPORTS} nlohmann_json QECUtils libstim tomlplusplus_tomlplusplus FILE ${catalyst_cmake_builddir}/CatalystTargets.cmake)
 
 # Generate MlirConfig.cmake for the build tree.
 set(CATALYST_CONFIG_CMAKE_DIR "${catalyst_cmake_builddir}")
